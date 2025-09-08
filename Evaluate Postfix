@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define MAX 100  // Maximum size for the stack
+
+// Function to evaluate Postfix expression
+int evaluatePostfix(char *postfix) {
+    int stack[MAX];
+    int top = -1;
+
+    // Traverse the Postfix expression
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        char ch = postfix[i];
+
+        // If the character is an operand, push it onto the stack
+        if (isdigit(ch)) {
+            stack[++top] = ch - '0';  // Convert char to int and push onto stack
+        } 
+        // If the character is an operator, pop two operands, apply the operator, and push the result
+        else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+            int operand2 = stack[top--];  // Pop the second operand
+            int operand1 = stack[top--];  // Pop the first operand
+
+            switch (ch) {
+                case '+':
+                    stack[++top] = operand1 + operand2;
+                    break;
+                case '-':
+                    stack[++top] = operand1 - operand2;
+                    break;
+                case '*':
+                    stack[++top] = operand1 * operand2;
+                    break;
+                case '/':
+                    stack[++top] = operand1 / operand2;
+                    break;
+            }
+        }
+    }
+
+    // The result will be the last remaining element in the stack
+    return stack[top];
+}
+
+int main() {
+    char postfix[MAX];
+
+    // Take the Postfix expression as input
+    printf("Enter Postfix expression: ");
+    scanf("%s", postfix);
+
+    // Evaluate the Postfix expression
+    int result = evaluatePostfix(postfix);
+
+    // Display the result
+    printf("The result of the Postfix expression is: %d\n", result);
+
+    return 0;
+}
