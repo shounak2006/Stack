@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuidEd</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+    .slideshow img {
+      position: absolute;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slideshow img.active {
+      opacity: 1;
+    }
+    header {
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .features {
+      background: rgba(255,255,255,0.85);
+      margin: 2rem;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .feature {
+      padding: 1rem 1.5rem;
+      background: #0077b6;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .feature:hover {
+      background: #023e8a;
+    }
+    .feature.highlight {
+      background: #ff6b6b;
+      font-weight: bold;
+    }
+    #quotes {
+      position: fixed;
+      bottom: 2rem;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Slideshow -->
+  <div class="slideshow">
+    <img src="https://img.freepik.com/free-photo/aerial-shot-lot-buildings-coast-sea-normandy-france_181624-13359.jpg?semt=ais_hybrid&w=740&q=80" class="active">
+    <img src="https://img.freepik.com/premium-photo/view-building-by-beach-against-cloudy-sky_1048944-27582267.jpg">
+    <img src="https://img.freepik.com/premium-photo/mont-saint-michel-abbey-with-sea-low-tide-obey-grazing_155113-89.jpg">
+  </div>
+
+  <!-- Header -->
+  <header>
+    <h1>GuidEd</h1>
+    <p>Your AI-powered Career Mentor</p>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Features</h2>
+    <div class="feature-list">
+      <div class="feature">🧠 Guidance</div>
+      <div class="feature">🎯 AI Assistant</div>
+      <div class="feature">📊 Reports</div>
+      <div class="feature">🌐 Institutes</div>
+      <div class="feature">❓ FAQ</div>
+      <div class="feature highlight" id="testBtn">📝 Take the Test</div>
+    </div>
+  </section>
+
+  <!-- Quotes -->
+  <div id="quotes"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Background Slideshow
+    const slides = document.querySelectorAll('.slideshow img');
+    let slideIndex = 0;
+    setInterval(() => {
+      slides[slideIndex].classList.remove('active');
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add('active');
+    }, 3000);
+
+    // Quotes Slideshow
+    const quotes = [
+      "“The future belongs to those who believe in the beauty of their dreams.” – Eleanor Roosevelt",
+      "“Your time is limited, so don’t waste it living someone else’s life.” – Steve Jobs",
+      "“Success is not final, failure is not fatal: It is the courage to continue that counts.” – Winston Churchill"
+    ];
+    let quoteIndex = 0;
+    const quoteEl = document.getElementById('quotes');
+    quoteEl.textContent = quotes[0];
+    setInterval(() => {
+      quoteEl.textContent = quotes[quoteIndex];
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+    }, 3000);
+
+    // Redirect "Take the Test" button
+    document.getElementById('testBtn').addEventListener('click', () => {
+      window.open(
+        'https://docs.google.com/forms/d/e/1FAIpQLSfJhiTNI8a75cssZeFI7yvRbaCRuTO8ytqndMsejSIQ1Fw5lw/viewform?pli=1',
+        '_blank'
+      );
+    });
+  </script>
+</body>
+</html>
